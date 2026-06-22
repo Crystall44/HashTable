@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="hashtable.c" />
     <ClCompile Include="hashtable.h" />
+    <ClCompile Include="main.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

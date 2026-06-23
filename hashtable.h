@@ -1,39 +1,39 @@
-#ifndef HASHTABLE_H
+п»ї#ifndef HASHTABLE_H
 #define HASHTABLE_H
 
-#include <stdint.h> // Для uint32_t
-#include <stdbool.h> // Для bool
+#include <stdint.h> // Р”Р»СЏ uint32_t
+#include <stdbool.h> // Р”Р»СЏ bool
 
-// Узел цепочки - элемент связного списка в одной ячейке
+// РЈР·РµР» С†РµРїРѕС‡РєРё - СЌР»РµРјРµРЅС‚ СЃРІСЏР·РЅРѕРіРѕ СЃРїРёСЃРєР° РІ РѕРґРЅРѕР№ СЏС‡РµР№РєРµ
 typedef struct HNode {
-	char* key; // Строка-ключ
-	int value; // Значение
-	struct HNode* next; // Указатель на следующий узел
+	char* key; // РЎС‚СЂРѕРєР°-РєР»СЋС‡
+	int value; // Р—РЅР°С‡РµРЅРёРµ
+	struct HNode* next; // РЈРєР°Р·Р°С‚РµР»СЊ РЅР° СЃР»РµРґСѓСЋС‰РёР№ СѓР·РµР»
 } HNode;
 
-// Хэш-таблица
+// РҐСЌС€-С‚Р°Р±Р»РёС†Р°
 typedef struct {
-	HNode** nodes; // Массив указателей на головы цепочек
-	int capacity; // Количество связных списков
-	int size; // Сколько всего элементов в таблице
+	HNode** nodes; // РњР°СЃСЃРёРІ СѓРєР°Р·Р°С‚РµР»РµР№ РЅР° РіРѕР»РѕРІС‹ С†РµРїРѕС‡РµРє
+	int capacity; // РљРѕР»РёС‡РµСЃС‚РІРѕ СЃРІСЏР·РЅС‹С… СЃРїРёСЃРєРѕРІ
+	int size; // РЎРєРѕР»СЊРєРѕ РІСЃРµРіРѕ СЌР»РµРјРµРЅС‚РѕРІ РІ С‚Р°Р±Р»РёС†Рµ
 } HashTable;
 
-// Множество - обертка над HashTable
-// Ключ = значение элемента, value всегда 1
+// РњРЅРѕР¶РµСЃС‚РІРѕ - РѕР±РµСЂС‚РєР° РЅР°Рґ HashTable
+// РљР»СЋС‡ = Р·РЅР°С‡РµРЅРёРµ СЌР»РµРјРµРЅС‚Р°, value РІСЃРµРіРґР° 1
 typedef struct {
-	HashTable* ht; // внутри хэш-таблица
+	HashTable* ht; // РІРЅСѓС‚СЂРё С…СЌС€-С‚Р°Р±Р»РёС†Р°
 } Set;
 
-// Мультимножество
-// Ключ = значение элемента, а value сколько раз он встречается
+// РњСѓР»СЊС‚РёРјРЅРѕР¶РµСЃС‚РІРѕ
+// РљР»СЋС‡ = Р·РЅР°С‡РµРЅРёРµ СЌР»РµРјРµРЅС‚Р°, Р° value СЃРєРѕР»СЊРєРѕ СЂР°Р· РѕРЅ РІСЃС‚СЂРµС‡Р°РµС‚СЃСЏ
 typedef struct {
 	HashTable* ht;
 } MultiSet;
 
-// Хэш-функция
+// РҐСЌС€-С„СѓРЅРєС†РёСЏ
 uint32_t fnv1a_hash(const char* key);
 
-// Хэш-таблица
+// РҐСЌС€-С‚Р°Р±Р»РёС†Р°
 HashTable* ht_create(int capacity);
 void ht_destroy(HashTable* ht);
 void ht_put(HashTable* ht, const char* key, int value);
@@ -42,7 +42,7 @@ bool ht_get(const HashTable* ht, const char* key, int* out_value);
 bool ht_remove(HashTable* ht, const char* key);
 int ht_size(const HashTable* ht);
 
-// Множество
+// РњРЅРѕР¶РµСЃС‚РІРѕ
 Set* set_create(int capacity);
 void set_destroy(Set* set);
 void set_add(Set* set, const char* key);
@@ -54,7 +54,7 @@ Set* set_intersection(const Set* a, const Set* b);
 Set* set_difference(const Set* a, const Set* b);
 void set_print(const Set* set);
 
-// Мультимножество
+// РњСѓР»СЊС‚РёРјРЅРѕР¶РµСЃС‚РІРѕ
 MultiSet* multiset_create(int capacity);
 void multiset_destroy(MultiSet* ms);
 void multiset_add(MultiSet* ms, const char* key, int count);
@@ -63,4 +63,4 @@ int multiset_count(const MultiSet* ms, const char* key);
 bool multiset_contains(const MultiSet* ms, const char* key);
 void multiset_print(const MultiSet* ms);
 
-#endif HASHTABLE_H
+#endif
